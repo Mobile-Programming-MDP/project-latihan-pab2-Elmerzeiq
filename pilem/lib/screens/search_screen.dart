@@ -5,6 +5,7 @@ import 'package:pilem/services/api_service.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
+
   @override
   SearchScreenState createState() => SearchScreenState();
 }
@@ -13,6 +14,9 @@ class SearchScreenState extends State<SearchScreen> {
   final ApiService _apiService = ApiService();
   final TextEditingController _searchController = TextEditingController();
   List<Movie> _searchResults = [];
+  bool _isLoading = false;
+  String? _errorMessage;
+
   @override
   void initState() {
     super.initState();
@@ -25,24 +29,41 @@ class SearchScreenState extends State<SearchScreen> {
     super.dispose();
   }
 
-  void _searchMovies() async {
-    if (_searchController.text.isEmpty) {
+  Future<void> _searchMovies() async {
+    final query = _searchController.text.trim();
+    if (query.isEmpty) {
       setState(() {
         _searchResults.clear();
+        _errorMessage = null;
       });
       return;
     }
-    final List<Map<String, dynamic>> searchData = await _apiService
-        .searchMovies(_searchController.text);
+
     setState(() {
-      _searchResults = searchData.map((e) => Movie.fromJson(e)).toList();
+      _isLoading = true;
+      _errorMessage = null;
     });
+
+    try {
+      final results = await _apiService.searchMovies(query);
+      setState(() {
+        _searchResults = results.map((e) => Movie.fromJson(e)).toList();
+      });
+    } catch (error) {
+      setState(() {
+        _errorMessage = "Failed to load search results.";
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search')),
+      appBar: AppBar(title: const Text('Search Movies')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,7 +72,7 @@ class SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 1.0),
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(
                 children: [
@@ -64,56 +85,59 @@ class SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                   ),
-
-                  Visibility(
-                    visible: _searchController.text.isNotEmpty,
-                    child: IconButton(
+                  if (_searchController.text.isNotEmpty)
+                    IconButton(
                       icon: const Icon(Icons.clear),
-
                       onPressed: () {
                         _searchController.clear();
-
                         setState(() {
                           _searchResults.clear();
                         });
                       },
                     ),
-                  ),
                 ],
               ),
             ),
             const SizedBox(height: 16),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _searchResults.length,
-                itemBuilder: (context, index) {
-                  final Movie movie = _searchResults[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: ListTile(
-                      leading: Image.network(
-                        'https://image.tmdb.org/t/p/w500${movie.posterPath}',
-                        height: 50,
-                        width: 50,
-                        fit: BoxFit.cover,
+            if (_isLoading)
+              const CircularProgressIndicator()
+            else if (_errorMessage != null)
+              Text(_errorMessage!, style: const TextStyle(color: Colors.red))
+            else if (_searchResults.isEmpty &&
+                _searchController.text.isNotEmpty)
+              const Text("No movies found."),
+            if (_searchResults.isNotEmpty)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _searchResults.length,
+                  itemBuilder: (context, index) {
+                    final Movie movie = _searchResults[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: ListTile(
+                        leading: Image.network(
+                          'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+                          height: 50,
+                          width: 50,
+                          fit: BoxFit.cover,
+                          errorBuilder:
+                              (context, error, stackTrace) =>
+                                  const Icon(Icons.image_not_supported),
+                        ),
+                        title: Text(movie.title),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailScreen(movie: movie),
+                            ),
+                          );
+                        },
                       ),
-
-                      title: Text(movie.title),
-
-                      onTap: () {
-                        Navigator.push(
-                          context,
-
-                          MaterialPageRoute(
-                            builder: (context) => DetailScreen(movie: movie),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
-            ),
           ],
         ),
       ),
