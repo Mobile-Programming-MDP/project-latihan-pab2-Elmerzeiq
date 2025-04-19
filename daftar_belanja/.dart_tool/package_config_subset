@@ -51,9 +51,9 @@ firebase_database_web
 file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_database_web-0.2.6+11/
 file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_database_web-0.2.6+11/lib/
 flutter_lints
-3.1
-file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-4.0.0/
-file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-4.0.0/lib/
+3.5
+file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-5.0.0/
+file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-5.0.0/lib/
 leak_tracker
 3.2
 file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker-10.0.8/
@@ -67,9 +67,9 @@ leak_tracker_testing
 file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-3.0.1/
 file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/leak_tracker_testing-3.0.1/lib/
 lints
-3.1
-file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/lints-4.0.0/
-file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/lints-4.0.0/lib/
+3.6
+file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/lints-5.1.1/
+file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/lints-5.1.1/lib/
 matcher
 3.4
 file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/matcher-0.12.17/
@@ -143,7 +143,7 @@ flutter_web_plugins
 file:///C:/flutter/packages/flutter_web_plugins/
 file:///C:/flutter/packages/flutter_web_plugins/lib/
 daftar_belanja
-3.5
+3.7
 file:///D:/semester%206/PAB2/project-latihan-pab2-Elmerzeiq/daftar_belanja/
 file:///D:/semester%206/PAB2/project-latihan-pab2-Elmerzeiq/daftar_belanja/lib/
 2

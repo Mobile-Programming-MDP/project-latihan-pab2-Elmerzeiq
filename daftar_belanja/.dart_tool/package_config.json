@@ -87,9 +87,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-4.0.0",
+      "rootUri": "file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_lints-5.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.5"
     },
     {
       "name": "flutter_test",
@@ -123,9 +123,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/lints-4.0.0",
+      "rootUri": "file:///C:/Users/hasan/AppData/Local/Pub/Cache/hosted/pub.dev/lints-5.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.6"
     },
     {
       "name": "matcher",
@@ -221,10 +221,10 @@
       "name": "daftar_belanja",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.7"
     }
   ],
-  "generated": "2025-04-11T03:31:43.484668Z",
+  "generated": "2025-04-19T13:31:44.665784Z",
   "generator": "pub",
   "generatorVersion": "3.7.0",
   "flutterRoot": "file:///C:/flutter",
