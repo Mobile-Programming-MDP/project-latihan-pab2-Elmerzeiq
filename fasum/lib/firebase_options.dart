@@ -55,6 +55,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '142046286826',
     projectId: 'fasum-7ade0',
     authDomain: 'fasum-7ade0.firebaseapp.com',
+    databaseURL: 'https://fasum-7ade0-default-rtdb.firebaseio.com',
     storageBucket: 'fasum-7ade0.firebasestorage.app',
     measurementId: 'G-M683EGP62D',
   );
@@ -64,6 +65,8 @@ class DefaultFirebaseOptions {
     appId: '1:142046286826:android:55ef677287bf12d7abd893',
     messagingSenderId: '142046286826',
     projectId: 'fasum-7ade0',
+    databaseURL: 'https://fasum-7ade0-default-rtdb.firebaseio.com',
     storageBucket: 'fasum-7ade0.firebasestorage.app',
   );
+
 }
