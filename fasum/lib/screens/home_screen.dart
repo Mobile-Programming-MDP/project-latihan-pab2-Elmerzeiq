@@ -39,6 +39,7 @@ class HomeScreen extends StatelessWidget {
         title: const Text("Home"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
+          IconButton( onPressed: (){}, icon: const Icon(Icons.filter_list) ,)
           IconButton(
             onPressed: () {
               signOut(context);
