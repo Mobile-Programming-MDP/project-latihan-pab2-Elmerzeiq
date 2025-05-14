@@ -1,4 +1,3 @@
-// screens/sign_up_screen.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fasum/screens/sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,7 +47,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Container(
               margin: const EdgeInsets.only(top: 16.0),
               child: ElevatedButton(
-                onPressed: _registerAccount,
+                onPressed: () {
+                  _registerAccount();
+                },
                 child: const Text('Daftar'),
               ),
             ),
@@ -62,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (_passwordController.text != _confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Password dan konfirmasi password tidak sama'),
+          content: Text('Password dan Konfirmasi Password Tidak Sama'),
         ),
       );
     } else {
@@ -73,15 +74,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               password: _passwordController.text,
             );
 
+        //Simpan Data Pengguna ke Firestore
         await FirebaseFirestore.instance
             .collection("users")
             .doc(newUser.user!.uid)
             .set({
-              'fullName': _fullNameController.text,
+              'fullName': _fullNameController.text.trim(),
               'email': _emailController.text,
               'createdAt': Timestamp.now(),
             });
-
         if (mounted) {
           Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const SignInScreen()),
@@ -90,19 +91,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       } on FirebaseAuthException catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Gagal mendaftar: ${e.message}')),
+            SnackBar(content: Text('Gagal Mendaftar : ${e.message}')),
           );
         }
       }
     }
-  }
-
-  @override
-  void dispose() {
-    _fullNameController.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
   }
 }
