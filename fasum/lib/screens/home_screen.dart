@@ -335,6 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return FirebaseFirestore.instance
           .collection("posts")
           .where("category", isEqualTo: selectedCategory)
+          .where("userId", isNotEqualTo: _currentUserId)
           .orderBy('createdAt', descending: true)
           .snapshots();
     }
